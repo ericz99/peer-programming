@@ -5,7 +5,8 @@
   "license": "MIT",
   "scripts": {
     "start": "nodemon",
-    "test": "mocha -r ts-node/register ./tests/*.spec.ts",
+    "test": "ts-mocha -p tsconfig.json --timeout 10000 ./tests/*.spec.ts",
+    "test:me": "ts-mocha -p tsconfig.json --timeout 10000 ./tests/socket.spec.ts",
     "coverage": "nyc npm run test",
     "build": "rm -rf dist && tsc",
     "build-legacy": "rm -rf dist && tsc && cp package*.json dist && cp Dockerfile dist && npm ci --prefix dist --production",
@@ -16,9 +17,10 @@
     "@istanbuljs/nyc-config-typescript": "^1.0.2",
     "@types/chai": "^4.3.0",
     "@types/cors": "^2.8.12",
+    "@types/expect": "^24.3.0",
     "@types/express": "^4.17.13",
     "@types/formidable": "^2.0.4",
-    "@types/mocha": "^9.1.0",
+    "@types/mocha": "^9.1.1",
     "@types/morgan": "^1.9.3",
     "@types/node": "^17.0.23",
     "@types/sha1": "^1.1.3",
@@ -33,17 +35,18 @@
     "nyc": "^15.1.0",
     "prettier": "^2.6.1",
     "pretty-quick": "^3.1.3",
+    "ts-mocha": "^10.0.0",
     "ts-node": "^10.7.0",
     "typescript": "^4.6.3"
   },
   "dependencies": {
-    "canvas": "^2.9.1",
     "cors": "^2.8.5",
     "express": "^4.17.3",
-    "formidable": "^2.0.1",
     "helmet": "^5.0.2",
+    "ioredis": "^5.2.2",
     "morgan": "^1.10.0",
-    "sha1": "^1.1.1",
+    "socket.io": "^4.5.1",
+    "socket.io-client": "^4.5.1",
     "winston": "^3.6.0"
   }
 }

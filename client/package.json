@@ -3,6 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@codemirror/lang-cpp": "^6.0.1",
+    "@codemirror/lang-html": "^6.1.0",
+    "@codemirror/lang-java": "^6.0.0",
+    "@codemirror/lang-javascript": "^6.0.2",
+    "@codemirror/lang-python": "^6.0.1",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^12.0.0",
     "@testing-library/user-event": "^13.2.1",
@@ -10,9 +15,18 @@
     "@types/node": "^16.7.13",
     "@types/react": "^17.0.20",
     "@types/react-dom": "^17.0.9",
+    "@uiw/codemirror-theme-androidstudio": "^4.11.6",
+    "@uiw/codemirror-theme-dracula": "^4.11.6",
+    "@uiw/codemirror-theme-eclipse": "^4.11.6",
+    "@uiw/codemirror-theme-sublime": "^4.11.6",
+    "@uiw/react-codemirror": "^4.11.4",
+    "codemirror": "^6.0.1",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
+    "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.0",
+    "socket.io-client": "^4.5.1",
+    "styled-components": "^5.3.5",
     "typescript": "^4.4.2",
     "web-vitals": "^2.1.0"
   },
@@ -39,5 +53,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@types/styled-components": "^5.1.26",
+    "react-icons": "^4.4.0"
   }
 }
