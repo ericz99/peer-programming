@@ -1,12 +1,11 @@
-version: '3.9'
+version: "3.9"
 
 services:
   client:
     container_name: frontend_web
     restart: always
     build: .
-    ports:
-      -"3000:3000"
+    ports: -"3000:80"
     volumes:
       - frontend:/usr/src/app
     networks:
@@ -15,17 +14,23 @@ services:
     container_name: backend_server
     restart: always
     build: .
-    ports:
-      -"5000:5000"
+    ports: -"5000:5000"
     volumes:
       - backend:/usr/src/app
+    networks:
+      - backend_net
+  redis:
+    image: "bitnami/redis:latest"
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
     networks:
       - backend_net
 
 networks:
   frontend_net:
   backend_net:
-    
+    driver: bridge
+
 volumes:
   frontend:
   backend:
