@@ -25,6 +25,8 @@ services:
       - ALLOW_EMPTY_PASSWORD=yes
     networks:
       - backend_net
+    volumes:
+      - /usr/src/app/data:/bitnami/redis/data
 
 networks:
   frontend_net:
