@@ -1,6 +1,13 @@
+import dotenv from 'dotenv';
+
+dotenv.config();
+
 const config = {
   port: 5002,
-  localMongoUri: 'mongodb://localhost/twitter-clone-db',
+  db_name: process.env.DB_NAME,
+  db_host: process.env.DB_HOST,
+  db_pass: process.env.DB_PASS,
+  db_user: process.env.DB_USER,
   secretKey: '$#EADTAT#WTTWAST',
   logs: {
     level: process.env.LOG_LEVEL || 'silly'

@@ -1,17 +1,23 @@
 import { Server, Socket } from 'socket.io';
 import http from 'http';
+import uuid from 'short-uuid';
 import logger from './logger';
 
-// import { getOrSetCache } from './utils';
 import { ClientToServerEvents, ServerToClientEvents, InterServerEvents, SocketData, RoomData, UserKeyboard } from './interfaces';
+import { Room, History, User } from './db/models';
 
 export default (server: http.Server) => {
   const io = new Server<ClientToServerEvents, ServerToClientEvents, InterServerEvents, SocketData>(server);
 
-  io.on('connection', (socket: Socket) => {
+  io.on('connection', async (socket: Socket) => {
     logger.log({
       level: 'info',
       message: `${socket.id} - User Connected!`
+    });
+
+    // # create user object
+    await User.create({
+      id: socket.id
     });
 
     // ### EVENTS START ###
@@ -30,29 +36,62 @@ export default (server: http.Server) => {
           type: 'JOIN_SESSION'
         });
 
-        // // # cache room
-        // await getOrSetCache({
-        //   key: `room_${room.id}`,
-        //   value: room
-        // });
+        const doesRoomExist = await Room.findOne({
+          where: {
+            id: room.id
+          }
+        });
+
+        if (!doesRoomExist) {
+          // # create room
+          const roomData = await Room.create(
+            {
+              id: uuid.generate()
+            },
+            {
+              include: [History]
+            }
+          );
+
+          await History.create({
+            id: uuid.generate(),
+            roomId: roomData.id
+          });
+        }
       }
     });
 
-    socket.on('replayUserKeyboard', (key: UserKeyboard, room: RoomData) => {
+    socket.on('replayUserKeyboard', async (key: UserKeyboard, room: RoomData) => {
       socket.to(room.id).emit('replayUserKeyboard', key);
+      // # update history
+      await History.update(
+        {
+          value: key.keyPressed
+        },
+        {
+          where: {
+            roomId: room.id
+          }
+        }
+      );
     });
 
     socket.on('syncData', async (roomId: string) => {
-      const curRoom = io.of('/').adapter.rooms.get(roomId);
+      const history = await History.findOne({
+        where: {
+          roomId
+        },
+        include: [Room]
+      });
 
       socket.emit('syncData', {
-        data: curRoom
+        data: history
       });
     });
 
     // ### EVENTS END ###
 
-    socket.on('disconnect', () => {
+    socket.on('disconnect', async () => {
       logger.log({
         level: 'info',
         message: 'User Disconnected!'
@@ -63,6 +102,12 @@ export default (server: http.Server) => {
           data: `${socket.id}`,
           type: 'LEAVE_SESSION'
         });
+      });
+
+      await User.destroy({
+        where: {
+          id: socket.id
+        }
       });
     });
   });

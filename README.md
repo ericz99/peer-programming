@@ -19,7 +19,8 @@ $ yarn run start
 # Features
 
 - Generation room
-- Built-in theme selection (limited)
+- Built-in theme selection from CodeMirror
+- React CodeMirror
 
 ## App Info
 

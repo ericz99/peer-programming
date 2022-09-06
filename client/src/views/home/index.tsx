@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+import uuid from "short-uuid";
 
 import { Hero } from "./components";
 import { GlobalContext } from "../../context/GlobalContext";
@@ -23,11 +24,13 @@ export default function Home() {
   const navigate = useNavigate();
 
   const onClick = () => {
+    const roomID = uuid.generate();
+
     setRoomData({
-      id: "12345",
+      id: roomID,
       users: [],
     });
-    navigate("/rooms/12345");
+    navigate(`/rooms/${roomID}`);
   };
 
   return (

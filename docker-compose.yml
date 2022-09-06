@@ -27,6 +27,14 @@ services:
       - backend_net
     volumes:
       - /usr/src/app/data:/bitnami/redis/data
+  db:
+    image: mysql
+    restart: always
+    environment:
+      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+      - MYSQL_DATABASE=example
+    volumes:
+      - /my/own/datadir:/var/lib/mysql
 
 networks:
   frontend_net:
