@@ -25,7 +25,7 @@ export interface ServerToClientEvents {
   joinSession: (room: RoomData) => void;
   leaveSession: (room: RoomData) => void;
   notifyRoomEvent: (evt: ExtraEvent) => void;
-  syncData: (room: RoomData) => void;
+  syncData: (data: any) => void;
 }
 
 export interface ClientToServerEvents {
@@ -34,7 +34,7 @@ export interface ClientToServerEvents {
   joinSession: (room: RoomData) => void;
   leaveSession: (room: RoomData) => void;
   notifyRoomEvent: (evt: ExtraEvent) => void;
-  syncData: (room: RoomData) => void;
+  syncData: (roomId: string) => void;
 }
 
 export interface SocketData {

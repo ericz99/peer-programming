@@ -1,5 +1,5 @@
 import { Optional } from 'sequelize';
-import { Table, Model, Column, PrimaryKey, BelongsToMany } from 'sequelize-typescript';
+import { Table, Model, Column, PrimaryKey, BelongsToMany, CreatedAt, UpdatedAt } from 'sequelize-typescript';
 
 import Room from './Room';
 import UserRoom from './UserRoom';
@@ -18,6 +18,12 @@ class User extends Model<UserAttributes, UserCreationAttributes> {
 
   @BelongsToMany(() => Room, () => UserRoom)
   rooms!: Room[];
+
+  @CreatedAt
+  createdAt!: Date;
+
+  @UpdatedAt
+  updatedAt!: Date;
 }
 
 export default User;

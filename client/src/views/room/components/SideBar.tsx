@@ -62,9 +62,14 @@ const SectionPanel = styled.section`
 interface SideBarProps {
   setTheme: React.Dispatch<React.SetStateAction<string>>;
   themeSelection: any;
+  download: () => void;
 }
 
-export default function SideBar({ setTheme, themeSelection }: SideBarProps) {
+export default function SideBar({
+  setTheme,
+  themeSelection,
+  download,
+}: SideBarProps) {
   const [isToggle, setToggle] = useState<boolean>(false);
 
   return (
@@ -77,7 +82,7 @@ export default function SideBar({ setTheme, themeSelection }: SideBarProps) {
             </button>
           </TagItem>
           <TagItem>
-            <button type="button">
+            <button type="button" onClick={() => download()}>
               <BsDownload />
             </button>
           </TagItem>

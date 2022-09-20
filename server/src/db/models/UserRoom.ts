@@ -1,4 +1,4 @@
-import { Table, Model, Column, ForeignKey } from 'sequelize-typescript';
+import { Table, Model, Column, ForeignKey, CreatedAt, UpdatedAt } from 'sequelize-typescript';
 
 import Room from './Room';
 import User from './User';
@@ -17,6 +17,12 @@ class UserRoom extends Model<UserAttributes> {
   @ForeignKey(() => Room)
   @Column
   roomId!: string;
+
+  @CreatedAt
+  createdAt!: Date;
+
+  @UpdatedAt
+  updatedAt!: Date;
 }
 
 export default UserRoom;

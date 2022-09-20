@@ -17,15 +17,21 @@ const Container = styled.div`
 interface CodeMirrorProps {
   socket: Socket<ServerToClientEvents, ClientToServerEvents>;
   theme: any;
+  value: string;
+  setValue: React.Dispatch<React.SetStateAction<string>>;
 }
 
-export default function CodeMirror({ socket, theme }: CodeMirrorProps) {
-  const [codeValue, setCodeValue] = useState<string>("");
+export default function CodeMirror({
+  socket,
+  theme,
+  value,
+  setValue,
+}: CodeMirrorProps) {
   const { id } = useParams();
 
   const onChange = React.useCallback(
     (value) => {
-      setCodeValue(value);
+      setValue(value);
       // # on replay if user typed
       socket.emit(
         "replayUserKeyboard",
@@ -41,15 +47,15 @@ export default function CodeMirror({ socket, theme }: CodeMirrorProps) {
   useEffect(() => {
     if (socket.connected) {
       socket.on("replayUserKeyboard", ({ keyPressed }) => {
-        setCodeValue(keyPressed);
+        setValue(keyPressed);
       });
     }
-  }, [socket]);
+  }, [socket, id]);
 
   return (
     <Container>
       <ReactCodeMirror
-        value={codeValue}
+        value={value}
         height="100vh"
         extensions={[javascript(), java(), cpp(), python()]}
         theme={theme}

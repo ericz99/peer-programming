@@ -1,5 +1,5 @@
 import { Optional } from 'sequelize';
-import { Table, Model, Column, PrimaryKey, IsUUID, HasOne, BelongsToMany } from 'sequelize-typescript';
+import { Table, Model, Column, PrimaryKey, HasOne, BelongsToMany, CreatedAt, UpdatedAt } from 'sequelize-typescript';
 
 import History from './History';
 import User from './User';
@@ -13,7 +13,6 @@ interface RoomCreationAttributes extends Optional<RoomAttributes, 'id'> {}
 
 @Table
 class Room extends Model<RoomAttributes, RoomCreationAttributes> {
-  @IsUUID('all')
   @PrimaryKey
   @Column
   id!: string;
@@ -23,6 +22,12 @@ class Room extends Model<RoomAttributes, RoomCreationAttributes> {
 
   @BelongsToMany(() => User, () => UserRoom)
   users!: User[];
+
+  @CreatedAt
+  createdAt!: Date;
+
+  @UpdatedAt
+  updatedAt!: Date;
 }
 
 export default Room;

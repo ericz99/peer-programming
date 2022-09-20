@@ -1,6 +1,5 @@
 import { Server, Socket } from 'socket.io';
 import http from 'http';
-import uuid from 'short-uuid';
 import logger from './logger';
 
 import { ClientToServerEvents, ServerToClientEvents, InterServerEvents, SocketData, RoomData, UserKeyboard } from './interfaces';
@@ -46,7 +45,7 @@ export default (server: http.Server) => {
           // # create room
           const roomData = await Room.create(
             {
-              id: uuid.generate()
+              id: room.id
             },
             {
               include: [History]
@@ -54,7 +53,7 @@ export default (server: http.Server) => {
           );
 
           await History.create({
-            id: uuid.generate(),
+            id: room.id,
             roomId: roomData.id
           });
         }
@@ -63,6 +62,14 @@ export default (server: http.Server) => {
 
     socket.on('replayUserKeyboard', async (key: UserKeyboard, room: RoomData) => {
       socket.to(room.id).emit('replayUserKeyboard', key);
+
+      /**
+       * if user join
+       * ask any user to sync their data
+       *
+       * for this update history we should only do it when a user disconnect or every 5-15 min
+       */
+
       // # update history
       await History.update(
         {

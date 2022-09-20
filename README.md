@@ -1,6 +1,6 @@
 ## Peer Programming
 
-> Simple code share with other people
+> Simple code share with other people like https://codeshare.io/
 
 # Installation
 

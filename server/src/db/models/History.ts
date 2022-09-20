@@ -1,5 +1,5 @@
 import { Optional } from 'sequelize';
-import { Table, Model, Column, PrimaryKey, IsUUID, ForeignKey, BelongsTo } from 'sequelize-typescript';
+import { Table, Model, Column, PrimaryKey, ForeignKey, BelongsTo, CreatedAt, UpdatedAt } from 'sequelize-typescript';
 
 import Room from './Room';
 
@@ -13,7 +13,6 @@ interface HistoryCreationAttributes extends Optional<HistoryAttributes, 'id'> {}
 
 @Table
 class History extends Model<HistoryAttributes, HistoryCreationAttributes> {
-  @IsUUID('all')
   @PrimaryKey
   @Column
   id!: string;
@@ -27,6 +26,12 @@ class History extends Model<HistoryAttributes, HistoryCreationAttributes> {
 
   @BelongsTo(() => Room)
   room!: Room;
+
+  @CreatedAt
+  createdAt!: Date;
+
+  @UpdatedAt
+  updatedAt!: Date;
 }
 
 export default History;

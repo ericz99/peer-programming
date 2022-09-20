@@ -34,6 +34,8 @@ const themeSelection: any = {
 export default function Room({ ctx }: RoomProps) {
   const { id } = useParams();
   const [theme, setTheme] = useState<string>("androidstudio");
+  const [value, setValue] = useState<string>("");
+  const [isMounted, setMounted] = useState<boolean>(false);
 
   useEffect(() => {
     if (ctx.currentUser?.connected) {
@@ -66,22 +68,48 @@ export default function Room({ ctx }: RoomProps) {
         }
       });
 
+      if (!isMounted) {
+        ctx.currentUser.emit("syncData", id!);
+        ctx.currentUser.on("syncData", ({ data }) => {
+          const { value } = data;
+          if (value) {
+            setValue(value);
+          }
+        });
+
+        setMounted(true);
+      }
+
       return () => {
         ctx.currentUser!.emit("leaveSession", { id });
       };
     }
-  }, [ctx, id]);
+  }, [ctx, id, isMounted]);
 
-  useEffect(() => {
-    console.log(theme);
-  }, [theme]);
+  const downloadCodeFile = () => {
+    const element = document.createElement("a");
+    const file = new Blob([value], { type: "text/plain" });
+    element.href = URL.createObjectURL(file);
+    element.download = "testfile.txt";
+    document.body.appendChild(element); // Required for this to work in FireFox
+    element.click();
+  };
 
   return (
     <Wrapper>
       <MainContainer>
-        <CodeMirror socket={ctx.currentUser!} theme={themeSelection[theme]} />
+        <CodeMirror
+          socket={ctx.currentUser!}
+          theme={themeSelection[theme]}
+          value={value}
+          setValue={setValue}
+        />
       </MainContainer>
-      <SideBar setTheme={setTheme} themeSelection={themeSelection} />
+      <SideBar
+        setTheme={setTheme}
+        themeSelection={themeSelection}
+        download={downloadCodeFile}
+      />
     </Wrapper>
   );
 }

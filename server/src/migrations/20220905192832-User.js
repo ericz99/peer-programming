@@ -10,7 +10,16 @@ module.exports = {
      */
 
     await queryInterface.createTable('Users', {
-      id: Sequelize.DataTypes.STRING
+      id: {
+        type: Sequelize.DataTypes.STRING,
+        primaryKey: true
+      },
+      createdAt: {
+        type: Sequelize.DataTypes.DATE
+      },
+      updatedAt: {
+        type: Sequelize.DataTypes.DATE
+      }
     });
   },
 

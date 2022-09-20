@@ -1,6 +1,6 @@
 import { Sequelize } from 'sequelize-typescript';
 
-import { User, Room, History } from './models';
+import { User, Room, History, UserRoom } from './models';
 import config from '../config';
 
 export default async () => {
@@ -10,10 +10,10 @@ export default async () => {
     dialect: 'mysql',
     username: config.db_user,
     password: config.db_pass,
-    models: [History, Room, User] // or [Player, Team],
+    models: [History, Room, User, UserRoom] // or [Player, Team],
   });
 
-  sequelize.addModels([User, Room, History]);
+  sequelize.addModels([User, Room, History, UserRoom]);
 
   return sequelize;
 };

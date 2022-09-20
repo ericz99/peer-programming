@@ -9,17 +9,26 @@ module.exports = {
      * await queryInterface.createTable('users', { id: Sequelize.INTEGER });
      */
     await queryInterface.createTable('Histories', {
-      id: Sequelize.DataTypes.STRING,
+      id: {
+        type: Sequelize.DataTypes.STRING,
+        primaryKey: true
+      },
       value: Sequelize.DataTypes.STRING,
       roomId: {
         type: Sequelize.DataTypes.STRING,
         allowNull: true,
         references: {
           model: {
-            tableName: 'rooms'
+            tableName: 'Rooms'
           },
           key: 'id'
         }
+      },
+      createdAt: {
+        type: Sequelize.DataTypes.DATE
+      },
+      updatedAt: {
+        type: Sequelize.DataTypes.DATE
       }
     });
   },
