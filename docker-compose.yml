@@ -4,8 +4,11 @@ services:
   client:
     container_name: frontend_web
     restart: always
-    build: .
-    ports: -"3000:80"
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    ports:
+      - "3000:80"
     volumes:
       - frontend:/usr/src/app
     networks:
@@ -13,28 +16,32 @@ services:
   server:
     container_name: backend_server
     restart: always
-    build: .
-    ports: -"5000:5000"
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    ports:
+      - "5002:5002"
+    environment:
+      - DB_NAME=test_db_1
+      - DB_USER=root
+      - DB_PASS=anything1234
+      - DB_HOST=localhost
     volumes:
       - backend:/usr/src/app
     networks:
       - backend_net
-  redis:
-    image: "bitnami/redis:latest"
-    environment:
-      - ALLOW_EMPTY_PASSWORD=yes
-    networks:
-      - backend_net
-    volumes:
-      - /usr/src/app/data:/bitnami/redis/data
+    depends_on:
+      - db
   db:
     image: mysql
     restart: always
     environment:
-      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
-      - MYSQL_DATABASE=example
+      - MYSQL_ROOT_PASSWORD=anything1234
+      - MYSQL_PASSWORD=anything1234
+      - MYSQL_DATABASE=test_db_1
+      - MYSQL_USER=user1
     volumes:
-      - /my/own/datadir:/var/lib/mysql
+      - ./data:/var/lib/mysql
 
 networks:
   frontend_net:

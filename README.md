@@ -16,6 +16,21 @@ $ yarn run preInstall
 $ yarn run start
 ```
 
+## Running containerization
+
+```sh
+
+# spin up a container
+$ docker-compose up -d --build --force-recreate
+
+# stop the container
+$ docker-compose stop
+
+# tear down the container
+$ docker-compose down
+
+```
+
 # Features
 
 - Generation room
