@@ -1,12 +1,26 @@
-FROM public.ecr.aws/bitnami/node:12
+FROM public.ecr.aws/bitnami/node:14 AS builder
 
 WORKDIR /usr/src/app
 
 COPY package.*json ./
 
-RUN yarn install
+# copy tsconfig
+COPY tsconfig.json ./
+
+RUN npm install
 
 COPY . .
 
-CMD ["npm", "run", "start"]
+RUN npm run build
+
+FROM nginx:alpine
+
+WORKDIR /usr/share/nginx/html
+
+RUN rm -rf ./*
+
+COPY --from=builder /usr/src/app/build .
+
+ENTRYPOINT [ "nginx", '-g', 'daemon off;' ]
+
 
