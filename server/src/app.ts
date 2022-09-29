@@ -3,6 +3,7 @@ import cors from 'cors';
 import helmet from 'helmet';
 import morgan from 'morgan';
 import http from 'http';
+import path from 'path';
 
 import getModels from './db';
 import logger from './logger';
@@ -31,9 +32,19 @@ export const createAppServer = async () => {
     socket(server);
   });
 
-  app.get('/', (_req, res, _next) => {
+  app.get('/test', (_req, res, _next) => {
     return res.send('auth_service: hit!');
   });
+
+  // server static assets if in production
+  if (process.env.NODE_ENV === 'production') {
+    // set static folder
+    app.use(express.static(path.resolve(__dirname, '..', '..', 'client/build')));
+
+    app.get('*', (_req, res, _next) => {
+      res.sendFile(path.resolve(__dirname, '..', '..', 'client/build/index.html'));
+    });
+  }
 
   return {
     app,

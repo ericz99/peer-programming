@@ -16,8 +16,6 @@ COPY . .
 # build dist
 RUN npm run build
 
-COPY /dist .
-
 EXPOSE 5002
 
 # run node index.js
