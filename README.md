@@ -31,6 +31,8 @@ $ docker-compose down
 
 ```
 
+- convert `.env.example` inside `./server` folder into `.env` and update the environment variables.
+
 # Features
 
 - Generation room
