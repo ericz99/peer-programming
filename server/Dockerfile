@@ -16,7 +16,13 @@ COPY . .
 # build dist
 RUN npm run build
 
+# expose port
 EXPOSE 5002
 
+RUN chmod +x startup.sh
+RUN npm i -g sequelize-cli
+RUN npm i -g nodemon
+
 # run node index.js
-CMD [ "npm", "run", "start-build" ]
+# CMD [ "npm", "run", "start-build" ]
+ENTRYPOINT [ "./startup.sh" ]
