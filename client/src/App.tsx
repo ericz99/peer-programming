@@ -12,6 +12,8 @@ const socket: Socket<ServerToClientEvents, ClientToServerEvents> = io(
   { transports: ["websocket"] }
 );
 
+console.log(process.env);
+
 export default function App() {
   const [_, setIsConnected] = useState(socket.connected);
   const ctx = useContext(GlobalContext);
@@ -55,19 +57,3 @@ export default function App() {
     </>
   );
 }
-
-/**
- *
- * [x] - setCurrentUser done
- * [ ] - when a new user joined, notify everyone, then add them into room object
- * [ ] - if user dc, clear their ctx, notify everyone user left and remove them from object
- * [ ] - if user use url link, then in room.tsx just use useParmas to extract the things
- * [ ] - sync data in room.tsx if user joined, send your sync data
- *
- */
-
-/**
- *  sync history of the code to every user that joined
- *
- *
- */

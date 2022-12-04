@@ -13,6 +13,7 @@
     "server-build": "cd server && yarn run build",
     "start-client-build": "cd client && yarn run start",
     "start-server-build": "cd server && yarn run start",
+    "preBuild": "concurrently \"yarn run client-build\" \"yarn run server-build\"",
     "preInstall": "concurrently \"yarn run client-install\" \"yarn run server-install\"",
     "start": "concurrently \"yarn run start-client-build\" \"yarn run start-server-build\""
   },
