@@ -13,10 +13,10 @@
     "build-legacy": "rm -rf dist && tsc && cp package*.json dist && cp Dockerfile dist && npm ci --prefix dist --production",
     "lint": "eslint . --max-warnings 0",
     "format": "pretty-quick --staged",
-    "db:create": "npx sequelize db:create --config=./src/config/config.json",
-    "db:drop": "npx sequelize db:drop --config=./src/config/config.json",
-    "db:migrate": "npx sequelize db:migrate --migrations-path=./src/migrations --config=./src/config/config.json",
-    "db:migrate:undo:all": "npx sequelize db:migrate:undo:all --migrations-path=./src/migrations --config=./src/config/config.json"
+    "db:create": "npx sequelize db:create",
+    "db:drop": "npx sequelize db:drop",
+    "db:migrate": "npx sequelize db:migrate ",
+    "db:migrate:undo:all": "npx sequelize db:migrate:undo:all"
   },
   "devDependencies": {
     "@istanbuljs/nyc-config-typescript": "^1.0.2",
