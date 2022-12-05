@@ -24,6 +24,10 @@ COPY package*.json ./
 
 COPY tsconfig.json ./
 
+COPY .sequelizerc ./
+
+COPY startup.sh ./
+
 COPY src/migrations ./
 
 RUN npm install --only=production
