@@ -35,8 +35,10 @@ EXPOSE 5002
 
 ENV NODE_ENV=production
 
+RUN chmod +x startup.sh
+RUN npm i -g sequelize-cli
 RUN npm i -g nodemon
 
 # run node index.js
 # CMD [ "npm", "run", "start-build" ]
-ENTRYPOINT [ "node", "index.js" ]
+ENTRYPOINT [ "./startup.sh"]
