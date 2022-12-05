@@ -8,15 +8,13 @@ COPY package*.json ./
 # copy tsconfig
 COPY tsconfig.json ./
 
-# run clean install production
-RUN yarn install
-
 COPY . .
 
-# build dist
-RUN yarn run build
+RUN yarn install --frozen-lockfile --production && yarn build
 
 FROM public.ecr.aws/bitnami/node:14
+
+USER node
 
 WORKDIR /usr/src/app
 
@@ -30,13 +28,9 @@ COPY startup.sh ./
 
 COPY src/migrations /usr/src/app/migrations
 
-RUN ls -a
+COPY --from=builder /usr/src/app/dist ./dist
 
-RUN yarn install
-
-COPY --from=builder /usr/src/app/dist ./
-
-RUN ls -a
+COPY --from=builder /usr/src/app/node_modules ./node_modules
 
 # expose port
 EXPOSE 5002
