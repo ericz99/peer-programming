@@ -15,6 +15,7 @@ services:
       - frontend:/usr/src/app
     networks:
       - frontend_net
+      - backend_net
       - proxy_net
     depends_on:
       - server
@@ -64,7 +65,6 @@ networks:
   proxy_net:
   frontend_net:
   backend_net:
-    driver: bridge
 
 volumes:
   frontend:
