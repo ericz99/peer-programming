@@ -8,7 +8,7 @@
     "test": "ts-mocha -p tsconfig.json --timeout 10000 ./tests/*.spec.ts",
     "test:me": "ts-mocha -p tsconfig.json --timeout 10000 ./tests/socket.spec.ts",
     "coverage": "nyc npm run test",
-    "build": "rm -rf dist && tsc && cp .env dist && cp .sequelizerc dist && cp src/migrations dist",
+    "build": "rm -rf dist && tsc && cp .env dist && cp .sequelizerc dist && cp .src/migrations dist",
     "start-build": "node ./dist/index.js",
     "build-legacy": "rm -rf dist && tsc && cp package*.json dist && cp Dockerfile dist && npm ci --prefix dist --production",
     "lint": "eslint . --max-warnings 0",
