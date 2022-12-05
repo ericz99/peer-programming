@@ -4,9 +4,9 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "docker-up": "docker-compose -f docker-compose.yml up -d --build --force-recreate",
-    "docker-down": "docker-compose -f docker-compose.yml down",
-    "docker-stop": "docker-compose -f docker-compose.yml stop",
+    "docker-up": "docker compose -f docker-compose.yml up -d --build --force-recreate",
+    "docker-down": "docker compose -f docker-compose.yml down",
+    "docker-stop": "docker compose -f docker-compose.yml stop",
     "client-install": "cd client && yarn install",
     "server-install": "cd server && yarn install",
     "client-build": "cd client && yarn run build",
