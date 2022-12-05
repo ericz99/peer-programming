@@ -24,7 +24,7 @@ COPY package*.json ./
 
 COPY tsconfig.json ./
 
-COPY startup.sh ./
+COPY . .
 
 RUN npm install --only=production
 
