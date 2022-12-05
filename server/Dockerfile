@@ -24,7 +24,7 @@ COPY package*.json ./
 
 COPY tsconfig.json ./
 
-COPY . .
+COPY src/migrations ./
 
 RUN npm install --only=production
 
