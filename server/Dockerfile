@@ -1,4 +1,4 @@
-FROM public.ecr.aws/bitnami/node:14 AS builder
+FROM public.ecr.aws/bitnami/node:14
 
 WORKDIR /usr/src/app
 
