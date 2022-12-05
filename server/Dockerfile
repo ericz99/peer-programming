@@ -14,7 +14,7 @@ RUN yarn install
 COPY . .
 
 # build dist
-RUN npm run build
+RUN yarn run build
 
 # expose port
 EXPOSE 5002
