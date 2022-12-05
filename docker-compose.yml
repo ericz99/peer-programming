@@ -36,18 +36,16 @@ services:
     networks:
       - backend_net
       - proxy_net
-    depends_on:
-      - db
-  db:
-    image: mysql
-    restart: always
-    environment:
-      - MYSQL_ROOT_PASSWORD=test1223
-      - MYSQL_PASSWORD=test1223
-      - MYSQL_DATABASE=test_db_1
-      - MYSQL_USER=user1
-    volumes:
-      - ./data:/var/lib/mysql
+  # db:
+  #   image: mysql
+  #   restart: always
+  #   environment:
+  #     - MYSQL_ROOT_PASSWORD=test1223
+  #     - MYSQL_PASSWORD=test1223
+  #     - MYSQL_DATABASE=test_db_1
+  #     - MYSQL_USER=user1
+  #   volumes:
+  #     - ./data:/var/lib/mysql
   proxy:
     image: nginx:alpine
     container_name: app-proxy
