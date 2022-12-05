@@ -30,9 +30,13 @@ COPY startup.sh ./
 
 COPY src/migrations /usr/src/app/migrations
 
+RUN ls -a
+
 RUN yarn install
 
 COPY --from=builder /usr/src/app/dist ./
+
+RUN ls -a
 
 # expose port
 EXPOSE 5002
