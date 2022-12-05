@@ -28,7 +28,7 @@ COPY .sequelizerc ./
 
 COPY startup.sh ./
 
-COPY ./src/migrations ./
+COPY src/migrations /usr/src/app/migrations
 
 RUN yarn install
 
