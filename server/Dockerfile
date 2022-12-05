@@ -24,6 +24,8 @@ COPY package*.json ./
 
 COPY tsconfig.json ./
 
+COPY startup.sh ./
+
 RUN npm install --only=production
 
 COPY --from=builder /usr/src/app/dist ./
