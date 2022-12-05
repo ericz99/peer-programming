@@ -28,7 +28,7 @@ services:
     environment:
       - DB_NAME=test_db_1
       - DB_USER=root
-      - DB_PASS=anything1234
+      - DB_PASS=test1223
       - DB_HOST=localhost
     volumes:
       - backend:/usr/src/app
@@ -40,8 +40,8 @@ services:
     image: mysql
     restart: always
     environment:
-      - MYSQL_ROOT_PASSWORD=anything1234
-      - MYSQL_PASSWORD=anything1234
+      - MYSQL_ROOT_PASSWORD=test1223
+      - MYSQL_PASSWORD=test1223
       - MYSQL_DATABASE=test_db_1
       - MYSQL_USER=user1
     volumes:
