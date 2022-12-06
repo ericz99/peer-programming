@@ -46,8 +46,8 @@ services:
       - 3306:3306
     expose:
       - "3306"
-    volumes:
-      - ./data:/var/lib/mysql
+    # volumes:
+    #   - ./data:/var/lib/mysql
     networks:
       - backend_net
     healthcheck:
