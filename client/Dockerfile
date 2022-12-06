@@ -23,6 +23,10 @@ RUN rm /etc/nginx/conf.d/default.conf
 
 COPY nginx.conf /etc/nginx/conf.d
 
+ENV VIRTUAL_HOST=peer-programming.ericzhang.xyz
+
+ENV LETSENCRYPT_HOST=peer-programming.ericzhang.xyz
+
 ENTRYPOINT ["nginx", "-g", "daemon off;"]
 
 
