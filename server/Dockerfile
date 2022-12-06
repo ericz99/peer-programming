@@ -10,7 +10,7 @@ COPY tsconfig.json ./
 
 COPY . .
 
-RUN yarn install --frozen-lockfile --production && yarn build
+RUN yarn install --production && yarn build
 
 FROM public.ecr.aws/bitnami/node:14
 
