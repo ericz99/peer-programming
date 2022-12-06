@@ -1,4 +1,4 @@
-FROM public.ecr.aws/bitnami/node:14 AS builder
+FROM node:14-alpine AS builder
 
 WORKDIR /usr/src/app
 
@@ -12,19 +12,19 @@ COPY . .
 
 RUN yarn install && yarn build
 
-FROM public.ecr.aws/bitnami/node:14 AS deps
+FROM node:14-alpine AS deps
 
 WORKDIR /usr/src/app
 
 RUN yarn install --production
 
-FROM public.ecr.aws/bitnami/node:14
+FROM node:14-alpine
 
 WORKDIR /usr/src/app
 
 COPY --from=deps /usr/src/app/node_modules ./node_modules/
 
-COPY --from=builder /usr/src/app/dist ./dist/
+COPY --from=builder /usr/src/app/dist ./
 
 # expose port
 EXPOSE 5002
