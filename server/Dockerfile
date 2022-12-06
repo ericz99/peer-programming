@@ -24,7 +24,7 @@ WORKDIR /usr/src/app
 
 COPY --from=deps /usr/src/app/node_modules ./node_modules/
 
-COPY --from=builder /usr/src/app/dist ./dist
+COPY --from=builder /usr/src/app/dist ./dist/
 
 # expose port
 EXPOSE 5002
