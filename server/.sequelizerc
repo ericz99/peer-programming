@@ -1,7 +1,9 @@
 const path = require('path');
 
+const IS_PROD = process.env.NODE_ENV == 'production';
+
 module.exports = {
-  config: path.resolve(__dirname, 'config.js'),
-  'models-path': path.resolve(__dirname, 'db/models'),
-  'migrations-path': path.resolve(__dirname, 'migrations')
+  config: IS_PROD ? path.resolve(__dirname, 'dbConfig.js') : path.resolve(__dirname, 'src', 'dbConfig.js'),
+  'models-path': IS_PROD ? path.resolve(__dirname, 'db/models') : path.resolve(__dirname, 'src', 'db/models'),
+  'migrations-path': IS_PROD ? path.resolve(__dirname, 'migrations') : path.resolve(__dirname, 'src', 'migrations')
 };
