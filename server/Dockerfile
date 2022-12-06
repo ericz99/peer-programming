@@ -18,15 +18,15 @@ FROM node:16-alpine
 
 WORKDIR /usr/src/app
 
-COPY package.json ./
+COPY package.json .
 
-COPY yarn.lock ./
+COPY yarn.lock .
 
-COPY startup.sh ./
+COPY startup.sh .
 
 RUN yarn install --production
 
-COPY --from=builder /usr/src/app/dist ./
+COPY --from=builder /usr/src/app/dist .
 
 # USER node
 
