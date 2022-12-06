@@ -8,9 +8,11 @@ COPY yarn.lock ./
 
 COPY tsconfig.json ./
 
+RUN yarn install
+
 COPY . .
 
-RUN yarn install && yarn build
+RUN yarn run build
 
 FROM node:16-alpine
 
