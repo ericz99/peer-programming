@@ -25,7 +25,7 @@ services:
     expose:
       - "5002"
     environment:
-      - DB_NAME=test_db_1
+      - DB_NAME=test_db_2
       - DB_USER=root
       - DB_PASS=test1223
       - DB_HOST=localhost
@@ -41,7 +41,7 @@ services:
     environment:
       - MYSQL_ROOT_PASSWORD=test1223
       - MYSQL_PASSWORD=test1223
-      - MYSQL_DATABASE=test_db_1
+      - MYSQL_DATABASE=test_db_2
       - MYSQL_USER=user1
     ports:
       - 3306:3306
