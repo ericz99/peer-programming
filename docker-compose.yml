@@ -7,8 +7,6 @@ services:
     build:
       context: ./client
       dockerfile: Dockerfile
-    ports:
-      - "8080:80"
     expose:
       - "8080"
     networks:
