@@ -35,7 +35,8 @@ services:
       - backend_net
       - proxy_net
     depends_on:
-      - db
+      db:
+        condition: service_healthy
   db:
     image: mysql
     restart: always
@@ -44,16 +45,18 @@ services:
       - MYSQL_PASSWORD=test1223
       - MYSQL_DATABASE=test_db_2
     ports:
-      - 3306:3306
+      - "3306:3306"
+    expose:
+      - "3306"
     volumes:
       - ./data:/var/lib/mysql
     networks:
       - backend_net
       - proxy_net
-    # healthcheck:
-    #   test: "mysql -uroot -p$$MYSQL_ROOT_PASSWORD  -e 'SHOW databases'"
-    #   interval: 10s
-    #   retries: 3
+    healthcheck:
+      test: "mysql -uroot -p$$MYSQL_ROOT_PASSWORD  -e 'SHOW databases'"
+      interval: 10s
+      retries: 3
   proxy:
     image: nginx:alpine
     container_name: app-proxy
