@@ -26,10 +26,11 @@ COPY --from=deps /usr/src/app/node_modules ./node_modules/
 
 COPY --from=builder /usr/src/app/dist ./
 
-# expose port
+USER node
+
 EXPOSE 5002
 
-# ENV NODE_ENV=production
+ENV NODE_ENV=production
 
 # RUN chmod +x startup.sh
 # RUN npm i -g sequelize-cli
