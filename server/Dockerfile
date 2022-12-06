@@ -1,4 +1,4 @@
-FROM node:14-alpine AS builder
+FROM node:16-alpine AS builder
 
 WORKDIR /usr/src/app
 
@@ -12,13 +12,13 @@ COPY . .
 
 RUN yarn install && yarn build
 
-FROM node:14-alpine AS deps
+FROM node:16-alpine AS deps
 
 WORKDIR /usr/src/app
 
 RUN yarn install --production
 
-FROM node:14-alpine
+FROM node:16-alpine
 
 WORKDIR /usr/src/app
 
