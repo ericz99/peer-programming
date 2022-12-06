@@ -44,7 +44,7 @@ services:
       - MYSQL_DATABASE=test_db_1
       - MYSQL_USER=user1
     ports:
-      - 3306:3006
+      - 3306:3306
     volumes:
       - ./data:/var/lib/mysql
     healthcheck:
