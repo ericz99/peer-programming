@@ -28,5 +28,6 @@ const config = {
 };
 
 console.log(config);
+console.log('PROD: ->>>', process.env.NODE_ENV);
 
 module.exports = config;
