@@ -2,10 +2,10 @@ FROM public.ecr.aws/bitnami/node:14 AS builder
 
 WORKDIR /usr/src/app
 
-# copy packge lock over
-COPY package.json yarn.lock ./
+COPY package.json ./
 
-# copy tsconfig
+COPY yarn.lock ./
+
 COPY tsconfig.json ./
 
 COPY . .
