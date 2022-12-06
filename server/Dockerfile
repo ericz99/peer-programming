@@ -14,17 +14,19 @@ COPY . .
 
 RUN yarn run build
 
-# FROM node:16-alpine
+FROM node:16-alpine
 
-# WORKDIR /usr/src/app
+WORKDIR /usr/src/app
 
-# COPY package.json ./
+COPY package.json ./
 
-# COPY yarn.lock ./
+COPY yarn.lock ./
 
-# RUN yarn install --production
+COPY startup.sh ./
 
-# COPY --from=builder /usr/src/app/dist ./
+RUN yarn install --production
+
+COPY --from=builder /usr/src/app/dist ./
 
 USER node
 
@@ -34,7 +36,6 @@ ENV NODE_ENV=production
 
 RUN chmod +x startup.sh
 RUN npm i -g sequelize-cli
-RUN npm i -g nodemon
 
 # # run node index.js
 # # CMD [ "npm", "run", "start-build" ]
