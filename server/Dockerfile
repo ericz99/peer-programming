@@ -12,17 +12,15 @@ COPY . .
 
 RUN yarn install && yarn build
 
-FROM node:16-alpine AS deps
-
-WORKDIR /usr/src/app
-
-RUN yarn install --production
-
 FROM node:16-alpine
 
 WORKDIR /usr/src/app
 
-COPY --from=deps /usr/src/app/node_modules ./node_modules/
+COPY package.json ./
+
+COPY yarn.lock ./
+
+RUN yarn install --production
 
 COPY --from=builder /usr/src/app/dist ./
 
