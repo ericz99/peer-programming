@@ -2,12 +2,14 @@ FROM public.ecr.aws/bitnami/node:14 AS builder
 
 WORKDIR /usr/src/app
 
-COPY package.*json ./
+COPY package.json ./
+
+COPY yarn.lock ./
 
 # copy tsconfig
 COPY tsconfig.json ./
 
-RUN npm install
+RUN yarn install
 
 COPY . .
 

@@ -38,4 +38,4 @@ RUN yarn run build
 
 # # run node index.js
 # # CMD [ "npm", "run", "start-build" ]
-ENTRYPOINT [ "node", "index.js" ]
+ENTRYPOINT [ "node", "dist/index.js" ]
