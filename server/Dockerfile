@@ -3,7 +3,7 @@ FROM public.ecr.aws/bitnami/node:14 AS builder
 WORKDIR /usr/src/app
 
 # copy packge lock over
-COPY package*.json yarn.lock ./
+COPY package.json yarn.lock ./
 
 # copy tsconfig
 COPY tsconfig.json ./
