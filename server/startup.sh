@@ -2,4 +2,4 @@
 
 yarn run db:create
 yarn run db:migrate
-node index.js
+node dist/index.js

@@ -11,8 +11,6 @@ services:
       - "80:80"
     expose:
       - "80"
-    volumes:
-      - frontend:/usr/src/app
     networks:
       - frontend_net
       - proxy_net
@@ -31,8 +29,6 @@ services:
       - DB_USER=root
       - DB_PASS=test1223
       - DB_HOST=localhost
-    volumes:
-      - backend:/usr/src/app
     networks:
       - backend_net
       - proxy_net
@@ -72,7 +68,3 @@ networks:
   frontend_net:
   backend_net:
     driver: bridge
-
-volumes:
-  frontend:
-  backend:
