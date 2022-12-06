@@ -8,11 +8,10 @@ services:
       context: ./client
       dockerfile: Dockerfile
     ports:
-      - "80:80"
-      - "443:443"
+      - "8080:80"
+      - "8080:443"
     expose:
-      - "80"
-      - "443"
+      - "8080"
     networks:
       - frontend_net
       - proxy_net
