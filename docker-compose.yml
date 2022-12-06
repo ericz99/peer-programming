@@ -8,16 +8,14 @@ services:
       context: ./client
       dockerfile: Dockerfile
     ports:
-      - 3000:80
-      - 5000:443
+      - 80:80
+    expose:
+      - 80
     networks:
       - frontend_net
       - proxy_net
     depends_on:
       - server
-    volumes:
-      - ./nginx/conf/:/etc/nginx/conf.d/:ro
-      - ./certbot/www:/var/www/certbot/:ro
   server:
     container_name: backend_server
     restart: always
@@ -59,11 +57,6 @@ services:
       test: "mysql -uroot -p$$MYSQL_ROOT_PASSWORD  -e 'SHOW databases'"
       interval: 10s
       retries: 3
-  certbot:
-    image: certbot/certbot:latest
-    volumes:
-      - ./certbot/www/:/var/www/certbot/:rw
-      - ./certbot/conf/:/etc/letsencrypt/:rw
   # proxy:
   #   image: nginx:alpine
   #   container_name: app-proxy
