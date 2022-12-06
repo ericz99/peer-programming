@@ -35,8 +35,7 @@ services:
       - backend_net
       - proxy_net
     depends_on:
-      db:
-        condition: service_healthy
+      - db
   db:
     image: mysql
     restart: always
