@@ -1,10 +1,11 @@
-**/node_modules/
-**/dist
-.git
-npm-debug.log
-.coverage
-.coverage.*
-.env
-.aws
+dist
 
 node_modules
+
+.dockerignore
+
+Dockerfile
+
+*.log
+
+readme.md
