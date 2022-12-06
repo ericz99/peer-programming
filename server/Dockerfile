@@ -39,5 +39,5 @@ RUN npm i -g sequelize-cli
 
 # # run node index.js
 # # CMD [ "npm", "run", "start-build" ]
-ENTRYPOINT [ "node", "index.js" ]
-# ENTRYPOINT [ "./startup.sh"]
+# ENTRYPOINT [ "node", "index.js" ]
+ENTRYPOINT [ "sh", "./startup.sh"]
