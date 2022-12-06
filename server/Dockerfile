@@ -3,44 +3,38 @@ FROM public.ecr.aws/bitnami/node:14 AS builder
 WORKDIR /usr/src/app
 
 # copy packge lock over
-COPY package*.json ./
+COPY package*.json yarn.lock ./
 
 # copy tsconfig
 COPY tsconfig.json ./
 
 COPY . .
 
-RUN yarn install --production && yarn build
+RUN yarn install && yarn build
 
-FROM public.ecr.aws/bitnami/node:14
-
-USER node
+FROM public.ecr.aws/bitnami/node:14 AS deps
 
 WORKDIR /usr/src/app
 
-COPY package*.json ./
+RUN yarn install --production
 
-COPY tsconfig.json ./
+FROM public.ecr.aws/bitnami/node:14
 
-COPY .sequelizerc ./
+WORKDIR /usr/src/app
 
-COPY startup.sh ./
-
-COPY src/migrations /usr/src/app/migrations
+COPY --from=deps /usr/src/app/node_modules ./node_modules/
 
 COPY --from=builder /usr/src/app/dist ./dist
-
-COPY --from=builder /usr/src/app/node_modules ./node_modules
 
 # expose port
 EXPOSE 5002
 
-ENV NODE_ENV=production
+# ENV NODE_ENV=production
 
-RUN chmod +x startup.sh
-RUN npm i -g sequelize-cli
-RUN npm i -g nodemon
+# RUN chmod +x startup.sh
+# RUN npm i -g sequelize-cli
+# RUN npm i -g nodemon
 
 # run node index.js
 # CMD [ "npm", "run", "start-build" ]
-ENTRYPOINT [ "./startup.sh"]
+ENTRYPOINT [ "node", "dist/index.js" ]
