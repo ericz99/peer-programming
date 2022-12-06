@@ -28,7 +28,7 @@ RUN yarn install --production
 
 COPY --from=builder /usr/src/app/dist ./
 
-USER node
+# USER node
 
 EXPOSE 5002
 
