@@ -27,6 +27,8 @@ ENV VIRTUAL_HOST=peer-programming.ericzhang.xyz
 
 ENV LETSENCRYPT_HOST=peer-programming.ericzhang.xyz
 
+ENV VIRTUAL_PORT=80
+
 ENTRYPOINT ["nginx", "-g", "daemon off;"]
 
 
