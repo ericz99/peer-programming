@@ -10,6 +10,7 @@ export default async () => {
     dialect: 'mysql',
     username: config.db_user,
     password: config.db_pass,
+    port: config.db_port as any,
     models: [History, Room, User, UserRoom] // or [Player, Team],
   });
 

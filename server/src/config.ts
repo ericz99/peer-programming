@@ -8,6 +8,7 @@ const config = {
   db_host: process.env.DB_HOST,
   db_pass: process.env.DB_PASS,
   db_user: process.env.DB_USER,
+  db_port: process.env.DB_PORT,
   secretKey: '$#EADTAT#WTTWAST',
   logs: {
     level: process.env.LOG_LEVEL || 'silly'

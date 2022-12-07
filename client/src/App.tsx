@@ -7,10 +7,13 @@ import { Home, Room } from "./views";
 import { ServerToClientEvents, ClientToServerEvents } from "./interfaces";
 import { GlobalContext } from "./context/GlobalContext";
 
-const socket: Socket<ServerToClientEvents, ClientToServerEvents> = io({
-  transports: ["websocket"],
-  path: "/socket.io",
-});
+const socket: Socket<ServerToClientEvents, ClientToServerEvents> = io(
+  "https://peer-programming-api.onrender.com/",
+  {
+    transports: ["websocket"],
+    // path: "/socket.io",
+  }
+);
 
 console.log(process.env);
 
