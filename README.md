@@ -7,7 +7,7 @@
 ## Running locally:
 
 ```sh
-$ git clone https://github.com/ericz99/instagram-monitor <folder name>
+$ git clone https://github.com/ericz99/peer-programming.git <folder name>
 
 $ yarn install
 
