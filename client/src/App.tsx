@@ -15,8 +15,6 @@ const socket: Socket<ServerToClientEvents, ClientToServerEvents> = io(
   }
 );
 
-console.log(process.env.API_URL);
-
 export default function App() {
   const [_, setIsConnected] = useState(socket.connected);
   const ctx = useContext(GlobalContext);
