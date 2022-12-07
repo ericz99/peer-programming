@@ -10,6 +10,10 @@ module.exports = {
      */
 
     await queryInterface.createTable('UserRooms', {
+      id: {
+        type: Sequelize.DataTypes.STRING,
+        primaryKey: true
+      },
       roomId: {
         type: Sequelize.DataTypes.STRING,
         allowNull: true,
