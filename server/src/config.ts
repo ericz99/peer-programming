@@ -3,7 +3,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 const config = {
-  port: 5002,
+  port: process.env.PORT || 5002,
   db_name: process.env.DB_NAME,
   db_host: process.env.DB_HOST,
   db_pass: process.env.DB_PASS,
